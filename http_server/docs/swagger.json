@@ -1,0 +1,3299 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "CRM",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "192.168.0.120:8000",
+    "paths": {
+        "/api/v1/chi-tiet-san-pham/{product_id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "API này lấy thông tin chi tiết của một sản phẩm theo ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product detail"
+                ],
+                "summary": "Get Product Detail",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID của sản phẩm",
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/chuc-vu": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter role based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "role"
+                ],
+                "summary": "Filter Role",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update an existing role entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "role"
+                ],
+                "summary": "Update Role",
+                "parameters": [
+                    {
+                        "description": "Updated Role data",
+                        "name": "Chuc_vu",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Chuc_vu_update"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new role entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "role"
+                ],
+                "summary": "Create Role",
+                "parameters": [
+                    {
+                        "description": "Role data",
+                        "name": "Discount_Type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Chuc_vu_create"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/chuc-vu/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete an existing role entry",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "role"
+                ],
+                "summary": "Delete Role",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Role ID to be deleted",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/cong-no-khach-hang": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter customer debt based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "debt"
+                ],
+                "summary": "Filter Customer Debt",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/cong-no-nha-phan-phoi": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter provider debt based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "debt"
+                ],
+                "summary": "Filter Provider Debt",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/dang-nhap": {
+            "post": {
+                "description": "Login API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login",
+                "parameters": [
+                    {
+                        "description": "Login data include username, password",
+                        "name": "Login_data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Dang_nhap"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Dang_nhap"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/don-vi-tinh": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter unit based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "unit"
+                ],
+                "summary": "Filter Unit",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update an existing unit entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "unit"
+                ],
+                "summary": "Update Unit",
+                "parameters": [
+                    {
+                        "description": "Updated unit data",
+                        "name": "Unit",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Don_vi_tinh_update"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new unit entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "unit"
+                ],
+                "summary": "Create unit",
+                "parameters": [
+                    {
+                        "description": "Unit data",
+                        "name": "Unit",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Don_vi_tinh_create"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/don-vi-tinh/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete an existing unit entry",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "unit"
+                ],
+                "summary": "Delete Unit",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "unit ID to be deleted",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/hoa-don-nhap-kho": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter import invoice based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "import invoice"
+                ],
+                "summary": "Filter Import Invoice",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update import invoice",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "import invoice"
+                ],
+                "summary": "Update Import Invoice",
+                "parameters": [
+                    {
+                        "description": "Update Import Invoice Data",
+                        "name": "Update_Import_Invoice",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Hoa_don_nhap_kho_update"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new import invoice entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "import invoice"
+                ],
+                "summary": "Create Import Invoice",
+                "parameters": [
+                    {
+                        "description": "Import Invoice data",
+                        "name": "Import_Invoice",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Hoa_don_nhap_kho_create"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/hoa-don-nhap-kho/lock": {
+            "patch": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Lock import invoice",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "import invoice"
+                ],
+                "summary": "Lock Import Invoice",
+                "parameters": [
+                    {
+                        "description": "Lock Import Invoice Data",
+                        "name": "Lock_Import_Invoice",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Hoa_don_nhap_kho_lock"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/hoa-don-nhap-kho/tra-hang": {
+            "patch": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Return Product for import invoice",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "import invoice"
+                ],
+                "summary": "Import Return Product",
+                "parameters": [
+                    {
+                        "description": "Return Product Data",
+                        "name": "Return_Product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Tra_hang_nhap_kho_request"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/hoa-don-nhap-kho/tra-no": {
+            "patch": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Pay Debt for import invoice",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "import invoice"
+                ],
+                "summary": "Import Debt Payment",
+                "parameters": [
+                    {
+                        "description": "Debt Payment Data",
+                        "name": "Debt_Payment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Tra_no_nhap_kho_request"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/hoa-don-xuat-kho": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter export invoice based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "export invoice"
+                ],
+                "summary": "Filter Export Invoice",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update export invoice",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "export invoice"
+                ],
+                "summary": "Update Export Invoice",
+                "parameters": [
+                    {
+                        "description": "Update Export Invoice Data",
+                        "name": "Update_Export_Invoice",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Hoa_don_xuat_kho_update"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new export invoice entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "export invoice"
+                ],
+                "summary": "Create Export Invoice",
+                "parameters": [
+                    {
+                        "description": "Export Invoice data",
+                        "name": "Export_Invoice",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Hoa_don_xuat_kho_create"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/hoa-don-xuat-kho/lock": {
+            "patch": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Lock export invoice",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "export invoice"
+                ],
+                "summary": "Lock Export Invoice",
+                "parameters": [
+                    {
+                        "description": "Lock Export Invoice Data",
+                        "name": "Lock_Export_Invoice",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Hoa_don_xuat_kho_lock"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/hoa-don-xuat-kho/tra-hang": {
+            "patch": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Return Product for export invoice",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "export invoice"
+                ],
+                "summary": "Export Return Product",
+                "parameters": [
+                    {
+                        "description": "Return Product Data",
+                        "name": "Return_Product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Tra_hang_xuat_kho_request"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/hoa-don-xuat-kho/tra-no": {
+            "patch": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Pay Debt for export invoice",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "export invoice"
+                ],
+                "summary": "Export Debt Payment",
+                "parameters": [
+                    {
+                        "description": "Debt Payment Data",
+                        "name": "Debt_Payment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Tra_no_xuat_kho_request"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/khach-hang": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter customer based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "customer"
+                ],
+                "summary": "Filter Customer",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update an existing customer entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "customer"
+                ],
+                "summary": "Update Customer",
+                "parameters": [
+                    {
+                        "description": "Updated customer data",
+                        "name": "Customer",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Khach_hang_update"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new customer entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "customer"
+                ],
+                "summary": "Create Customer",
+                "parameters": [
+                    {
+                        "description": "Customer data",
+                        "name": "Discount_Type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Khach_hang_create"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/khach-hang/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete an existing customer entry",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "customer"
+                ],
+                "summary": "Delete Customer",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Customer ID to be deleted",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/kho": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter ware house based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "ware house"
+                ],
+                "summary": "Filter Ware House",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update an existing ware house entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ware house"
+                ],
+                "summary": "Update WareHouse",
+                "parameters": [
+                    {
+                        "description": "Updated ware house data",
+                        "name": "Ware_House",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Kho_update"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new ware house entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ware house"
+                ],
+                "summary": "Create Ware House",
+                "parameters": [
+                    {
+                        "description": "ware house data",
+                        "name": "Ware_House",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Kho_create"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/kho/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete an existing ware house entry",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ware house"
+                ],
+                "summary": "Delete Ware House",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Ware House ID to be deleted",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/loai-giam-gia": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter discount type based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "discount type"
+                ],
+                "summary": "Filter Discount Type",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update an existing discount type entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "discount type"
+                ],
+                "summary": "Update Discount Type",
+                "parameters": [
+                    {
+                        "description": "Updated Discount Type data",
+                        "name": "Discount_Type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Loai_giam_gia_update"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new discount type entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "discount type"
+                ],
+                "summary": "Create Discount Type",
+                "parameters": [
+                    {
+                        "description": "Discount Type data",
+                        "name": "Discount_Type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Loai_giam_gia_create"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/loai-giam-gia/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete an existing discount type entry",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "discount type"
+                ],
+                "summary": "Delete Discount Type",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "discount type ID to be deleted",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/loai-san-pham": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter product type based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "product type"
+                ],
+                "summary": "Filter Product Type",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update an existing product type entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product type"
+                ],
+                "summary": "Update Product Type",
+                "parameters": [
+                    {
+                        "description": "Product Type Update Data",
+                        "name": "UpdateProductType",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Loai_san_pham_update"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "message: cap nhat loai san pham thanh cong",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "message: error message",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new product type entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product type"
+                ],
+                "summary": "Create Product Type",
+                "parameters": [
+                    {
+                        "description": "Product Type Create Data",
+                        "name": "CreateProductType",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Loai_san_pham_create"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data: Loai_san_pham_create, message: them loai san pham thanh cong",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "message: error message",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/loai-san-pham/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete an existing product type entry",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product type"
+                ],
+                "summary": "Delete Product Type",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "product type ID to be deleted",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/nha-phan-phoi": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter provider based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "provider"
+                ],
+                "summary": "Filter Provider",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update an existing provider entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "provider"
+                ],
+                "summary": "Update Provider",
+                "parameters": [
+                    {
+                        "description": "Updated provider data",
+                        "name": "Provider",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Nha_phan_phoi_update"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new provider entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "provider"
+                ],
+                "summary": "Create Provider",
+                "parameters": [
+                    {
+                        "description": "Provider data",
+                        "name": "Provider",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Nha_phan_phoi_create"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/nha-phan-phoi/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete an existing provider entry",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "provider"
+                ],
+                "summary": "Delete Provider",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Provider ID to be deleted",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/nhan-vien": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter employee based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "employee"
+                ],
+                "summary": "Filter Employee",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update an existing employee entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "employee"
+                ],
+                "summary": "Update Employee",
+                "parameters": [
+                    {
+                        "description": "Employee Update Data",
+                        "name": "UpdateEmployee",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Nhan_vien_update"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "message: cap nhat nhan vien thanh cong",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "message: error message",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new employee entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "employee"
+                ],
+                "summary": "Create Employee",
+                "parameters": [
+                    {
+                        "description": "Employee Create Data",
+                        "name": "CreateEmployee",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Nhan_vien_create"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data: Nhan_vien_create, message: them nhan vien thanh cong",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "message: error message",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/nhan-vien/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete an existing employee entry",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "employee"
+                ],
+                "summary": "Delete Employee",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Employee ID to be deleted",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/quyen": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get permission by role id",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "permission"
+                ],
+                "summary": "Get Permission",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Role id",
+                        "name": "Chuc_vu_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/quyen/modify": {
+            "patch": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Modify permission by Role",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "permission"
+                ],
+                "summary": "Get Permission",
+                "parameters": [
+                    {
+                        "description": "Modify permission",
+                        "name": "Modify",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Quyen_modify"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/san-pham": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter product based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Filter Product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update an existing product entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Update Product",
+                "parameters": [
+                    {
+                        "description": "Product Update Data",
+                        "name": "UpdateProduct",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.San_pham_update"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "message: cap nhat san pham thanh cong",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "message: error message",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new product entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Create Product",
+                "parameters": [
+                    {
+                        "description": "Product Create Data",
+                        "name": "CreateProduct",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.San_pham_create"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data: San_pham_create, message: them san pham thanh cong",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "message: error message",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/san-pham/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete an existing product entry",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Delete Product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "product ID to be deleted",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/thoi-gian-bao-hanh": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter warranty time based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "warranty time"
+                ],
+                "summary": "Filter Warranty Time",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update an existing warranty time entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "warranty time"
+                ],
+                "summary": "Update Warranty Time",
+                "parameters": [
+                    {
+                        "description": "Updated warranty time data",
+                        "name": "Warranty_Time",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Thoi_gian_bao_hanh_update"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new warranty time entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "warranty time"
+                ],
+                "summary": "Create Warranty Time",
+                "parameters": [
+                    {
+                        "description": "Warranty time data",
+                        "name": "Warranty_Time",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Thoi_gian_bao_hanh_create"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/thoi-gian-bao-hanh/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete an existing warranty time entry",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "warranty time"
+                ],
+                "summary": "Delete Warranty Time",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Warranty time ID to be deleted",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/thong-tin-nhan-vien": {
+            "get": {
+                "description": "Get Me API by sending JWT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Get Me",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Get_me"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/ton-kho/{ctsp_id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get in stock by product detail id",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "in stock"
+                ],
+                "summary": "Get In Stock",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Product detail id",
+                        "name": "Ctsp_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "requests.Chi_tiet_hoa_don_nhap_kho_create": {
+            "type": "object",
+            "required": [
+                "chiet_khau",
+                "ctsp_id",
+                "don_vi_tinh",
+                "gia_ban",
+                "gia_nhap",
+                "han_su_dung",
+                "hoa_don_id",
+                "ke",
+                "la_qua_tang",
+                "san_pham_id",
+                "so_luong",
+                "thanh_tien",
+                "upc"
+            ],
+            "properties": {
+                "chiet_khau": {
+                    "type": "number"
+                },
+                "ctsp_id": {
+                    "type": "integer"
+                },
+                "don_vi_tinh": {
+                    "type": "string"
+                },
+                "gia_ban": {
+                    "type": "number"
+                },
+                "gia_nhap": {
+                    "type": "number"
+                },
+                "han_su_dung": {
+                    "type": "string"
+                },
+                "hoa_don_id": {
+                    "type": "integer"
+                },
+                "ke": {
+                    "type": "string"
+                },
+                "la_qua_tang": {
+                    "type": "boolean"
+                },
+                "san_pham_id": {
+                    "type": "integer"
+                },
+                "sku": {
+                    "type": "string"
+                },
+                "so_luong": {
+                    "type": "integer"
+                },
+                "thanh_tien": {
+                    "type": "number"
+                },
+                "upc": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Chi_tiet_hoa_don_xuat_kho_create": {
+            "type": "object",
+            "required": [
+                "chiet_khau",
+                "ctsp_id",
+                "don_vi_tinh",
+                "ds_sku",
+                "gia_ban",
+                "gia_nhap",
+                "la_qua_tang",
+                "loi_nhuan",
+                "san_pham_id",
+                "sku",
+                "so_luong_ban",
+                "thanh_tien"
+            ],
+            "properties": {
+                "chiet_khau": {
+                    "type": "number"
+                },
+                "ctsp_id": {
+                    "type": "integer"
+                },
+                "don_vi_tinh": {
+                    "type": "string"
+                },
+                "ds_sku": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/requests.Chi_tiet_sku"
+                    }
+                },
+                "gia_ban": {
+                    "type": "number"
+                },
+                "gia_nhap": {
+                    "type": "number"
+                },
+                "la_qua_tang": {
+                    "type": "boolean"
+                },
+                "loi_nhuan": {
+                    "type": "number"
+                },
+                "san_pham_id": {
+                    "type": "integer"
+                },
+                "sku": {
+                    "type": "string"
+                },
+                "so_luong_ban": {
+                    "type": "integer"
+                },
+                "thanh_tien": {
+                    "type": "number"
+                }
+            }
+        },
+        "requests.Chi_tiet_san_pham_nhap_tra": {
+            "type": "object",
+            "required": [
+                "cthd_nhap_kho_id",
+                "sku",
+                "so_luong_tra"
+            ],
+            "properties": {
+                "cthd_nhap_kho_id": {
+                    "type": "integer"
+                },
+                "sku": {
+                    "type": "string"
+                },
+                "so_luong_tra": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.Chi_tiet_san_pham_request": {
+            "type": "object",
+            "required": [
+                "id",
+                "ten_phan_loai",
+                "trang_thai"
+            ],
+            "properties": {
+                "hinh_anh": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ten_phan_loai": {
+                    "type": "string"
+                },
+                "trang_thai": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.Chi_tiet_san_pham_xuat_tra": {
+            "type": "object",
+            "required": [
+                "cthd_xuat_kho_id",
+                "sku",
+                "so_luong_tra"
+            ],
+            "properties": {
+                "cthd_xuat_kho_id": {
+                    "type": "integer"
+                },
+                "sku": {
+                    "type": "string"
+                },
+                "so_luong_tra": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.Chi_tiet_sku": {
+            "type": "object",
+            "properties": {
+                "gia_ban": {
+                    "description": "Gia_nhap\t\t\tfloat32\t\t\t\t`json:\"gia_nhap\" binding:\"omitempty\"`",
+                    "type": "number"
+                },
+                "sku": {
+                    "type": "string"
+                },
+                "so_luong_ban": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.Chuc_vu_create": {
+            "type": "object",
+            "required": [
+                "ten"
+            ],
+            "properties": {
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Chuc_vu_update": {
+            "type": "object",
+            "required": [
+                "id",
+                "ten"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Dang_nhap": {
+            "type": "object",
+            "required": [
+                "mat_khau",
+                "ten_dang_nhap"
+            ],
+            "properties": {
+                "mat_khau": {
+                    "type": "string"
+                },
+                "ten_dang_nhap": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Don_vi_tinh_create": {
+            "type": "object",
+            "required": [
+                "ten"
+            ],
+            "properties": {
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Don_vi_tinh_update": {
+            "type": "object",
+            "required": [
+                "id",
+                "ten"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Hoa_don_nhap_kho_create": {
+            "type": "object",
+            "required": [
+                "ds_san_pham_nhap",
+                "kho_id",
+                "ngay_nhap",
+                "nha_phan_phoi_id"
+            ],
+            "properties": {
+                "con_lai": {
+                    "type": "number"
+                },
+                "ds_san_pham_nhap": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/requests.Chi_tiet_hoa_don_nhap_kho_create"
+                    }
+                },
+                "ghi_chu": {
+                    "type": "string"
+                },
+                "kho_id": {
+                    "type": "integer"
+                },
+                "ma_hoa_don": {
+                    "type": "string"
+                },
+                "ngay_nhap": {
+                    "type": "string"
+                },
+                "nha_phan_phoi_id": {
+                    "type": "integer"
+                },
+                "so_hoa_don": {
+                    "type": "integer"
+                },
+                "tong_tien": {
+                    "type": "number"
+                },
+                "tra_truoc": {
+                    "type": "number"
+                }
+            }
+        },
+        "requests.Hoa_don_nhap_kho_lock": {
+            "type": "object",
+            "required": [
+                "hoa_don_id"
+            ],
+            "properties": {
+                "hoa_don_id": {
+                    "type": "integer"
+                },
+                "lock_or_open": {
+                    "type": "string",
+                    "enum": [
+                        "lock",
+                        "open"
+                    ]
+                }
+            }
+        },
+        "requests.Hoa_don_nhap_kho_update": {
+            "type": "object",
+            "required": [
+                "ghi_chu",
+                "hoa_don_id",
+                "ngay_nhap",
+                "tra_truoc"
+            ],
+            "properties": {
+                "ghi_chu": {
+                    "type": "string"
+                },
+                "hoa_don_id": {
+                    "type": "integer"
+                },
+                "ngay_nhap": {
+                    "type": "string"
+                },
+                "tra_truoc": {
+                    "type": "number"
+                }
+            }
+        },
+        "requests.Hoa_don_xuat_kho_create": {
+            "type": "object",
+            "required": [
+                "da_giao_hang",
+                "ds_san_pham_xuat",
+                "gia_tri_chiet_khau",
+                "khach_hang_id",
+                "loai_chiet_khau",
+                "loi_nhuan",
+                "ngay_xuat",
+                "nhan_vien_giao_hang_id",
+                "nhan_vien_sale_id",
+                "thanh_tien",
+                "tong_tien",
+                "tra_truoc",
+                "vat"
+            ],
+            "properties": {
+                "con_lai": {
+                    "type": "number"
+                },
+                "da_giao_hang": {
+                    "type": "boolean"
+                },
+                "ds_san_pham_xuat": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/requests.Chi_tiet_hoa_don_xuat_kho_create"
+                    }
+                },
+                "ghi_chu": {
+                    "type": "string"
+                },
+                "gia_tri_chiet_khau": {
+                    "type": "integer"
+                },
+                "khach_hang_id": {
+                    "type": "integer"
+                },
+                "loai_chiet_khau": {
+                    "type": "integer"
+                },
+                "loi_nhuan": {
+                    "description": "Tong_gia_nhap\t\t\t\tfloat32\t\t\t\t\t\t`json:\"tong_gia_nhap\" binding:\"omitempty\"`",
+                    "type": "number"
+                },
+                "ma_hoa_don": {
+                    "type": "string"
+                },
+                "ngay_xuat": {
+                    "type": "string"
+                },
+                "nhan_vien_giao_hang_id": {
+                    "type": "integer"
+                },
+                "nhan_vien_sale_id": {
+                    "type": "integer"
+                },
+                "so_hoa_don": {
+                    "type": "integer"
+                },
+                "thanh_tien": {
+                    "type": "number"
+                },
+                "tong_tien": {
+                    "type": "number"
+                },
+                "tra_truoc": {
+                    "type": "number"
+                },
+                "vat": {
+                    "type": "number"
+                }
+            }
+        },
+        "requests.Hoa_don_xuat_kho_lock": {
+            "type": "object",
+            "required": [
+                "hoa_don_id"
+            ],
+            "properties": {
+                "hoa_don_id": {
+                    "type": "integer"
+                },
+                "lock_or_open": {
+                    "type": "string",
+                    "enum": [
+                        "lock",
+                        "open"
+                    ]
+                }
+            }
+        },
+        "requests.Hoa_don_xuat_kho_update": {
+            "type": "object",
+            "required": [
+                "hoa_don_id",
+                "khach_hang_id",
+                "ngay_xuat",
+                "nhan_vien_giao_hang_id",
+                "nhan_vien_sale_id"
+            ],
+            "properties": {
+                "da_giao_hang": {
+                    "type": "boolean"
+                },
+                "ghi_chu": {
+                    "type": "string"
+                },
+                "gia_tri_chiet_khau": {
+                    "type": "integer"
+                },
+                "hoa_don_id": {
+                    "type": "integer"
+                },
+                "khach_hang_id": {
+                    "type": "integer"
+                },
+                "loai_chiet_khau": {
+                    "type": "integer"
+                },
+                "ngay_xuat": {
+                    "type": "string"
+                },
+                "nhan_vien_giao_hang_id": {
+                    "type": "integer"
+                },
+                "nhan_vien_sale_id": {
+                    "type": "integer"
+                },
+                "tra_truoc": {
+                    "type": "number"
+                },
+                "vat": {
+                    "type": "number"
+                }
+            }
+        },
+        "requests.Khach_hang_create": {
+            "type": "object",
+            "required": [
+                "dia_chi",
+                "dien_thoai",
+                "ho_ten"
+            ],
+            "properties": {
+                "dia_chi": {
+                    "type": "string"
+                },
+                "dien_thoai": {
+                    "type": "string"
+                },
+                "ho_ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Khach_hang_update": {
+            "type": "object",
+            "required": [
+                "dia_chi",
+                "dien_thoai",
+                "ho_ten",
+                "id"
+            ],
+            "properties": {
+                "dia_chi": {
+                    "type": "string"
+                },
+                "dien_thoai": {
+                    "type": "string"
+                },
+                "ho_ten": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Kho_create": {
+            "type": "object",
+            "required": [
+                "dia_chi",
+                "ten"
+            ],
+            "properties": {
+                "dia_chi": {
+                    "type": "string"
+                },
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Kho_update": {
+            "type": "object",
+            "required": [
+                "dia_chi",
+                "id",
+                "ten"
+            ],
+            "properties": {
+                "dia_chi": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Loai_giam_gia_create": {
+            "type": "object",
+            "required": [
+                "gia_tri",
+                "ten"
+            ],
+            "properties": {
+                "gia_tri": {
+                    "type": "number"
+                },
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Loai_giam_gia_update": {
+            "type": "object",
+            "required": [
+                "gia_tri",
+                "id",
+                "ten"
+            ],
+            "properties": {
+                "gia_tri": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Loai_san_pham_create": {
+            "type": "object",
+            "required": [
+                "hinh_anh",
+                "ten"
+            ],
+            "properties": {
+                "hinh_anh": {
+                    "type": "string"
+                },
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Loai_san_pham_update": {
+            "type": "object",
+            "required": [
+                "id",
+                "ten"
+            ],
+            "properties": {
+                "hinh_anh": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Nha_phan_phoi_create": {
+            "type": "object",
+            "required": [
+                "dia_chi",
+                "dien_thoai",
+                "email",
+                "ten"
+            ],
+            "properties": {
+                "dia_chi": {
+                    "type": "string"
+                },
+                "dien_thoai": {
+                    "type": "string"
+                },
+                "ds_san_pham": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "email": {
+                    "type": "string"
+                },
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Nha_phan_phoi_update": {
+            "type": "object",
+            "required": [
+                "dia_chi",
+                "dien_thoai",
+                "email",
+                "id",
+                "ten"
+            ],
+            "properties": {
+                "dia_chi": {
+                    "type": "string"
+                },
+                "dien_thoai": {
+                    "type": "string"
+                },
+                "ds_san_pham": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Nhan_vien_create": {
+            "type": "object",
+            "required": [
+                "avatar",
+                "chuc_vu",
+                "dia_chi",
+                "dien_thoai",
+                "email",
+                "ho_ten",
+                "ten_dang_nhap"
+            ],
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "chuc_vu": {
+                    "type": "integer"
+                },
+                "dia_chi": {
+                    "type": "string"
+                },
+                "dien_thoai": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "ho_ten": {
+                    "type": "string"
+                },
+                "ten_dang_nhap": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Nhan_vien_update": {
+            "type": "object",
+            "required": [
+                "chuc_vu",
+                "dia_chi",
+                "dien_thoai",
+                "email",
+                "ho_ten",
+                "id",
+                "ten_dang_nhap"
+            ],
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "chuc_vu": {
+                    "type": "integer"
+                },
+                "dia_chi": {
+                    "type": "string"
+                },
+                "dien_thoai": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "ho_ten": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ten_dang_nhap": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Quyen_modify": {
+            "type": "object",
+            "required": [
+                "chuc_vu_id",
+                "quyen"
+            ],
+            "properties": {
+                "chuc_vu_id": {
+                    "type": "integer"
+                },
+                "quyen": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/requests.Quyen_modify_data"
+                    }
+                }
+            }
+        },
+        "requests.Quyen_modify_data": {
+            "type": "object",
+            "required": [
+                "active",
+                "id"
+            ],
+            "properties": {
+                "active": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.San_pham_create": {
+            "type": "object",
+            "required": [
+                "don_vi_tinh_id",
+                "hinh_anh",
+                "loai_san_pham_id",
+                "ten",
+                "upc"
+            ],
+            "properties": {
+                "chi_tiet_san_pham": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/requests.Chi_tiet_san_pham_request"
+                    }
+                },
+                "don_vi_tinh_id": {
+                    "type": "integer"
+                },
+                "hinh_anh": {
+                    "type": "string"
+                },
+                "loai_giam_gia_id": {
+                    "type": "integer"
+                },
+                "loai_san_pham_id": {
+                    "type": "integer"
+                },
+                "mo_ta": {
+                    "type": "string"
+                },
+                "ten": {
+                    "type": "string"
+                },
+                "thoi_gian_bao_hanh_id": {
+                    "type": "integer"
+                },
+                "trang_thai": {
+                    "type": "integer"
+                },
+                "upc": {
+                    "type": "string"
+                },
+                "vat": {
+                    "type": "number"
+                }
+            }
+        },
+        "requests.San_pham_update": {
+            "type": "object",
+            "required": [
+                "id",
+                "ten",
+                "upc"
+            ],
+            "properties": {
+                "chi_tiet_san_pham": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/requests.Chi_tiet_san_pham_request"
+                    }
+                },
+                "don_vi_tinh_id": {
+                    "type": "integer"
+                },
+                "hinh_anh": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "loai_giam_gia_id": {
+                    "type": "integer"
+                },
+                "loai_san_pham_id": {
+                    "type": "integer"
+                },
+                "mo_ta": {
+                    "type": "string"
+                },
+                "ten": {
+                    "type": "string"
+                },
+                "thoi_gian_bao_hanh_id": {
+                    "type": "integer"
+                },
+                "trang_thai": {
+                    "type": "integer"
+                },
+                "upc": {
+                    "type": "string"
+                },
+                "vat": {
+                    "type": "number"
+                }
+            }
+        },
+        "requests.Thoi_gian_bao_hanh_create": {
+            "type": "object",
+            "required": [
+                "ten"
+            ],
+            "properties": {
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Thoi_gian_bao_hanh_update": {
+            "type": "object",
+            "required": [
+                "id",
+                "ten"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "ten": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Tra_hang_nhap_kho_request": {
+            "type": "object",
+            "required": [
+                "ds_san_pham_tra",
+                "hoa_don_id"
+            ],
+            "properties": {
+                "ds_san_pham_tra": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/requests.Chi_tiet_san_pham_nhap_tra"
+                    }
+                },
+                "hoa_don_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.Tra_hang_xuat_kho_request": {
+            "type": "object",
+            "required": [
+                "ds_san_pham_tra",
+                "hoa_don_id"
+            ],
+            "properties": {
+                "ds_san_pham_tra": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/requests.Chi_tiet_san_pham_xuat_tra"
+                    }
+                },
+                "hoa_don_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.Tra_no_nhap_kho_request": {
+            "type": "object",
+            "required": [
+                "hoa_don_id",
+                "tien_tra"
+            ],
+            "properties": {
+                "hoa_don_id": {
+                    "type": "integer"
+                },
+                "tien_tra": {
+                    "type": "number"
+                }
+            }
+        },
+        "requests.Tra_no_xuat_kho_request": {
+            "type": "object",
+            "required": [
+                "hoa_don_id",
+                "tien_tra"
+            ],
+            "properties": {
+                "hoa_don_id": {
+                    "type": "integer"
+                },
+                "tien_tra": {
+                    "type": "number"
+                }
+            }
+        },
+        "responses.Dang_nhap": {
+            "type": "object",
+            "properties": {
+                "ds_quyen": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses.Get_me": {
+            "type": "object",
+            "properties": {
+                "CreatedAt": {
+                    "type": "string"
+                },
+                "DeletedAt": {
+                    "type": "string"
+                },
+                "ID": {
+                    "type": "integer"
+                },
+                "UpdateAt": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "chuc_vu": {
+                    "type": "string"
+                },
+                "chuc_vu_id": {
+                    "type": "string"
+                },
+                "dia_chi": {
+                    "type": "string"
+                },
+                "dien_thoai": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "ho_ten": {
+                    "type": "string"
+                },
+                "quyen": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ten_dang_nhap": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
