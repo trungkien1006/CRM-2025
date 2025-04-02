@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  my-mysql:
+    image: mysql:8.4
+    restart: always
+    environment:
+      DOCKER_ENV: "true"
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: intern_admin_v3
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3300"
+    volumes:
+      - mysql_data:/var/lib/mysql 
+      - ./intern_admin_v3.sql:/docker-entrypoint-initdb.d/intern_admin_v3.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7
+    restart: always
+    ports:
+      - "6379"
+
+  kafka:
+    image: wurstmeister/kafka:latest
+    container_name: kafka
+    restart: always
+    environment:
+      KAFKA_LISTENER_SECURITY_PROTOCOL: PLAINTEXT
+      KAFKA_LISTENERS: INSIDE://0.0.0.0:9093
+      KAFKA_LISTENER_NAMES: INSIDE
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093
+      KAFKA_LISTENER_INSIDE_INTERFACE: eth0
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_CONFLUENT_SUPPORT_METRICS_ENABLE: "false"
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT
+      KAFKA_LISTENER_NAME_INSIDE_PORT: 9093
+      KAFKA_LISTENER_NAME_INSIDE_PROTOCOL: PLAINTEXT
+      KAFKA_METADATA_LOG_DIR: /var/lib/kafka/metadata
+      KAFKA_KRAFT_MODE: "true"
+      KAFKA_LOG_RETENTION_HOURS: 168
+    ports:
+      - "9093"
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+      - kafka_metadata:/var/lib/kafka/metadata
+    command: ["sh", "-c", "echo 'broker.id=1' > /etc/kafka/broker-metadata.properties && /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties"]
+
+  kafka-topics-creator:
+    image: wurstmeister/kafka:latest
+    depends_on:
+      - kafka
+    command: >
+      bash -c "
+        echo 'Waiting for Kafka to start...';
+        sleep 30;
+        kafka-topics.sh --create --topic topic1 --partitions 1 --replication-factor 1 --bootstrap-server kafka:9093 &&
+        kafka-topics.sh --create --topic topic2 --partitions 1 --replication-factor 1 --bootstrap-server kafka:9093;
+      "
+    networks:
+      - mynetwork
+
+  app:
+    image: my-app:latest
+    restart: always
+    environment:
+      MYSQL_HOST: my-mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_NAME: intern_admin_v3
+      PORT: 8000
+      PORT_SOCKET: 8001
+    depends_on:
+      my-mysql:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  kafka-consumer:
+    image: my-kafka-consumer:latest
+    restart: always
+    ports:
+      - "8002"
+
+  socket-server:
+    image: my-socket-server:latest
+    restart: always
+    ports:
+      - "8001:8001"
+
+volumes:
+  mysql_data:
+  kafka_data:
+  kafka_metadata:
+
+networks:
+  mynetwork:
+    driver: bridge
