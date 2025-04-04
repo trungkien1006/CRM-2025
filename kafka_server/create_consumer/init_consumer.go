@@ -4,10 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"os"
-	"os/signal"
-	"sync"
-	"syscall"
 
 	"github.com/IBM/sarama"
 )
@@ -34,7 +30,9 @@ func (h ConsumerGroupHandler) ConsumeClaim(session sarama.ConsumerGroupSession, 
 	return nil
 }
 
-func ConsumerInit(brokers []string, group string, topic string, config *sarama.Config) {
+func ConsumerInit(brokers []string, group string, topic string, config *sarama.Config, ctx context.Context) {
+	fmt.Println("Consumer is initing...")
+
 	// Tạo consumer group
 	consumerGroup, err := sarama.NewConsumerGroup(brokers, group, config)
 	if err != nil {
@@ -42,32 +40,21 @@ func ConsumerInit(brokers []string, group string, topic string, config *sarama.C
 	}
 	defer consumerGroup.Close()
 
-	ctx, cancel := context.WithCancel(context.Background())
-	wg := &sync.WaitGroup{}
-	wg.Add(1)
-
+	// Bắt đầu đọc message
 	go func() {
-		defer wg.Done()
 		for {
 			err := consumerGroup.Consume(ctx, []string{topic}, ConsumerGroupHandler{})
 			if err != nil {
-				log.Printf("Lỗi trong consumer group: %v", err) // Log lỗi nhưng không dừng app
+				log.Printf("Lỗi trong consumer group: %v", err)
 			}
-
 			if ctx.Err() != nil {
-				return // Chỉ thoát nếu context bị huỷ (shutdown)
+				fmt.Println("Consumer stopped due to context cancellation.")
+				return // Chấm dứt khi context bị hủy
 			}
-
-			log.Println("💡 Rebalance xảy ra, consumer đang chạy lại...")
 		}
 	}()
 
-	// Xử lý tín hiệu shutdown
-	sigchan := make(chan os.Signal, 1)
-	signal.Notify(sigchan, os.Interrupt, syscall.SIGTERM)
-	<-sigchan
-
-	fmt.Println("Shutting down consumer...")
-	cancel()
-	wg.Wait()
+	// Đợi cho đến khi context bị hủy
+	<-ctx.Done()
+	fmt.Println("Consumer shutting down gracefully.")
 }

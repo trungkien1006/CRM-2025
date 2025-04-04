@@ -2,17 +2,8 @@ FROM golang:1.23-alpine AS builder
 
 WORKDIR /app
 
-# Copy go.mod và go.sum trước để tận dụng cache Docker
-COPY go.mod go.sum ./
-
-# Tải dependencies trước
-RUN go mod download
-
-# Copy toàn bộ source code vào container
-COPY . .
-
 # Kiểm tra và dọn dẹp dependencies
-RUN go mod tidy
+RUN go mod tidy -v
 
 # Biên dịch ứng dụng
 RUN go build -o websocket_server

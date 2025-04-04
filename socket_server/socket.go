@@ -42,6 +42,8 @@ func handleWebSocket(c *gin.Context) {
 	fmt.Println("Header nhận được:", header)
 
 	if err := helpers.CheckJWT(header); err != nil {
+		fmt.Println("Unauthorization:", err.Error())
+
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"message": err.Error(),
 		})
@@ -189,7 +191,7 @@ func SendMessageByProducerHandler(clientMessage string) {
 
 func main() {
 	if os.Getenv("DOCKER_ENV") != "true" {
-		_ = godotenv.Load("../.env") // Chỉ tải .env nếu không chạy trong Docker
+		_ = godotenv.Load() // Chỉ tải .env nếu không chạy trong Docker
 	}
 
 	gin.SetMode(os.Getenv("GIN_MODE"))
@@ -201,7 +203,9 @@ func main() {
 
 	port := os.Getenv("PORT_SOCKET")
 
-	ln, err := net.Listen("tcp", "0.0.0.0:" + port)
+	fmt.Println("port: " + port)
+
+	ln, err := net.Listen("tcp", "0.0.0.0:" + "8001")
 
 	if err != nil {
 		panic(err)

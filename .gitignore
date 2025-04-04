@@ -1,3 +1,11 @@
 /http_server/go.mod
 /http_server/go.sum
 /http_server/.env
+
+/socket_server/go.mod
+/socket_server/go.sum
+/socket_server/.env
+
+/kafka_server/go.mod
+/kafka_server/go.sum
+/kafka_server/.env
