@@ -1,39 +1,29 @@
-name: Auto Deploy on Source B
+name: Auto Deploy HTTP Server
 
 on:
   push:
     branches:
-      - main  # Kích hoạt khi có code push vào main
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Cài đặt sshpass
         run: sudo apt-get install -y sshpass
 
-      - name: Kết nối SSH và restart service
+      - name: SSH vào VPS và chạy script
         run: |
-            sshpass -p "${{ secrets.PASSWORD }}" ssh -tt -o StrictHostKeyChecking=no \
-            -p ${{ secrets.PORT }} \
-            ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
-        
-            echo "⏱ $(date): Đang dừng service..."
-            sudo systemctl stop kafka_server
-            sudo systemctl stop socket_server
-            sudo systemctl stop http_server
-        
-            sleep 3
-        
-            echo "⏱ $(date): Đang pull code..."
-            cd /home/doanvanquoc/CRM-2025
-            git pull origin main
-        
-            echo "⏱ $(date): Khởi động lại service..."
-            sudo systemctl start kafka_server
-            sudo systemctl start socket_server
-            sudo systemctl start http_server
-        
-            echo "✅ Xong!"
-            exit
-            EOF
+          sshpass -p "${{ secrets.PASSWORD }}" ssh -tt -o StrictHostKeyChecking=no \
+          -p ${{ secrets.PORT }} \
+          ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
+
+          echo "✅ SSH thành công. Đang gọi script triển khai..."
+
+          # Gọi script
+          bash /home/doanvanquoc/scripts/deploy_http_server.sh
+
+          echo "✅ Script đã chạy xong!"
+          exit
+EOF
