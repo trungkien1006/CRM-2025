@@ -17,9 +17,6 @@ jobs:
         env:
           SSHPASS: ${{ secrets.PASSWORD }}
         run: |
-          sshpass -e ssh -tt -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USER }}@${{ secrets.HOST }} << EOF
-          echo "✅ SSH thành công. Đang gọi script triển khai..."
-          bash /home/doanvanquoc/CRM-2025/deploy_all.sh
-          echo "✅ Script đã chạy xong!"
-          exit
-          EOF
+          echo "✅ Bắt đầu SSH và chạy script trên VPS..."
+          sshpass -e ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USER }}@${{ secrets.HOST }} \
+          "bash /home/doanvanquoc/CRM-2025/deploy_all.sh && echo '✅ Script chạy xong!'"
