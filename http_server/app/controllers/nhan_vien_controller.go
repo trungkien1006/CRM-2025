@@ -6,6 +6,7 @@ import (
 	"admin-v1/app/models/requests"
 	"admin-v1/app/models/responses"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -69,7 +70,7 @@ func CreateEmployee(c *gin.Context) {
 		return
 	}
 
-	if err := helpers.Redis.Set(helpers.Ctx, "user:" + string(res.Nhan_vien.ID), string(res.Nhan_vien.Chuc_vu_id), 0).Err(); err != nil {
+	if err := helpers.Redis.Set(helpers.Ctx, "user:" + strconv.Itoa(int(res.Nhan_vien.ID)), strconv.Itoa(res.Nhan_vien.Chuc_vu_id), 0).Err(); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),
 		})
@@ -112,7 +113,7 @@ func UpdateEmployee(c *gin.Context) {
 		return
 	}
 
-	if err := helpers.Redis.Set(helpers.Ctx, "user:" + string(req.Id), string(req.Chuc_vu_id), 0).Err(); err != nil {
+	if err := helpers.Redis.Set(helpers.Ctx, "user:" + strconv.Itoa(req.Id), strconv.Itoa(req.Chuc_vu_id), 0).Err(); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),
 		})
@@ -153,7 +154,7 @@ func DeleteEmployee(c *gin.Context) {
 		return
 	}
 
-	if err := helpers.Redis.Del(helpers.Ctx, "user:" + string(req.Id)).Err(); err != nil {
+	if err := helpers.Redis.Del(helpers.Ctx, "user:" + strconv.Itoa(req.Id)).Err(); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),
 		})
