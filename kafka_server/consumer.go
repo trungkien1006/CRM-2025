@@ -20,7 +20,7 @@ func main() {
 	config.Consumer.Offsets.Initial = sarama.OffsetNewest
 
 	// Kafka broker
-	brokers := []string{"kafka:9092"}
+	brokers := []string{"localhost:9092"}
 	// brokers := []string{"172.26.168.7:9092"}
 
 	// Tạo WaitGroup để đợi các goroutine kết thúc

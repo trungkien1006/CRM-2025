@@ -32,7 +32,8 @@ func main() {
 
 	helpers.Redis = redis.NewClient(&redis.Options{
 		// Addr:         "172.26.168.7:6379",
-		Addr:         "redis:6379",
+		// Addr:         "redis:6379",
+		Addr:         "0.0.0.0:6379",
 		PoolSize:     20,
 		MinIdleConns: 5,  
 	})
