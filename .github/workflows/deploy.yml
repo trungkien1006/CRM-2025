@@ -25,5 +25,5 @@ jobs:
           bash /home/doanvanquoc/CRM-2025/deploy_all.sh
 
           echo "✅ Script đã chạy xong!"
-          exit
+          exit 0
           EOF
