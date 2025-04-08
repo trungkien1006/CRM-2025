@@ -13,17 +13,13 @@ jobs:
       - name: Cài đặt sshpass
         run: sudo apt-get install -y sshpass
 
-      - name: SSH vào VPS và chạy script
+      - name: Triển khai lên VPS
+        env:
+          SSHPASS: ${{ secrets.PASSWORD }}
         run: |
-          sshpass -p "${{ secrets.PASSWORD }}" ssh -tt -o StrictHostKeyChecking=no \
-          -p ${{ secrets.PORT }} \
-          ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
-
+          sshpass -e ssh -tt -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USER }}@${{ secrets.HOST }} << EOF
           echo "✅ SSH thành công. Đang gọi script triển khai..."
-
-          # Gọi script
           bash /home/doanvanquoc/CRM-2025/deploy_all.sh
-
           echo "✅ Script đã chạy xong!"
           exit
-EOF
+          EOF
