@@ -22,7 +22,7 @@ jobs:
           echo "✅ SSH thành công. Đang gọi script triển khai..."
 
           # Gọi script
-          bash /home/doanvanquoc/scripts/deploy_http_server.sh
+          bash /home/doanvanquoc/CRM-2025/deploy_all.sh
 
           echo "✅ Script đã chạy xong!"
           exit
