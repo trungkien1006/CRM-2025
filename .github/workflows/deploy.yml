@@ -26,4 +26,4 @@ jobs:
 
           echo "✅ Script đã chạy xong!"
           exit
-EOF
+          EOF
