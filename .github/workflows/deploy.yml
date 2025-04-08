@@ -20,11 +20,10 @@ jobs:
 
           echo "✅ Đã SSH vào server!"
           cd /home/doanvanquoc/CRM-2025
-          sudo systemctl stop http_server
-          sudo systemctl stop socket_server
-          sudo systemctl stop kafka_server
           git pull origin main
-          sudo systemctl start http_server
-          sudo systemctl start socket_server
-          sudo systemctl start kafka_server
+          sudo systemctl restart http_server
+          sudo systemctl restart socket_server
+          sudo systemctl restart kafka_server
+
+          exit
           EOF
