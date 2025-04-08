@@ -12,18 +12,19 @@ jobs:
       - name: Cài đặt sshpass
         run: sudo apt-get install -y sshpass
 
-      #- name: Debug Network
-       # run: |
-        #  echo "🔍 Kiểm tra kết nối đến SSH server..."
-         # nc -zv ${{ secrets.SOURCE_B_HOST }} ${{ secrets.SOURCE_B_PORT }} || echo "❌ Không thể kết nối đến server"
-
       - name: Kết nối SSH bằng mật khẩu và triển khai code
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no \
-          -p ${{ secrets.SOURCE_B_PORT }} \
-          ${{ secrets.SOURCE_B_USER }}@${{ secrets.SOURCE_B_HOST }} << 'EOF'
-          
+          sshpass -p "${{ secrets.PASSWORD }}" ssh -tt -o StrictHostKeyChecking=no \
+          -p ${{ secrets.PORT }} \
+          ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
+
           echo "✅ Đã SSH vào server!"
-          cd /mnt/c/Users/ADMIN/Desktop/Intern2025/Project/github-action-test/CRM-2025-ADMIN
+          cd /home/doanvanquoc/CRM-2025
+          sudo systemctl stop http_server
+          sudo systemctl stop socket_server
+          sudo systemctl stop kafka_server
           git pull origin main
+          sudo systemctl start http_server
+          sudo systemctl start socket_server
+          sudo systemctl start kafka_server
           EOF
