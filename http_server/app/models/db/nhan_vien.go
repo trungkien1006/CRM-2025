@@ -14,6 +14,8 @@ type Nhan_vien struct {
 	Avatar        				string				`json:"avatar"`
 	Chuc_vu_id    				int					`json:"chuc_vu_id"`
 
+	Tin_nhan_da_gui				[]Tin_nhan			`json:"tin_nhan_da_gui" gorm:"foreignKey:sender_id"`
+	Tin_nhan_da_nhan			[]Tin_nhan			`json:"tin_nhan_da_nhan" gorm:"foreignKey:receiver_id"`
 	Chuc_vu						Chuc_vu				`json:"chuc_vu"`
 	Hoa_don_xuat_kho_sale		[]Hoa_don_xuat_kho	`json:"hoa_don_xuat_kho_sale" gorm:"foreignKey:nhan_vien_sale_id"`
 	Hoa_don_xuat_kho_giao_hang	[]Hoa_don_xuat_kho	`json:"hoa_don_xuat_kho_giao_hang" gorm:"foreignKey:nhan_vien_giao_hang_id"`

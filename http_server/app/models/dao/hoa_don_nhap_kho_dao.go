@@ -288,7 +288,7 @@ func ImportDebtPaymentExec(req *requests.Tra_no_nhap_kho_request) error {
 	}
 
 	//kiem tra tien tra no hop le
-	if hdnk.Con_lai <= req.Tien_tra {
+	if hdnk.Con_lai < req.Tien_tra {
 		return errors.New("tien tra no khong hop le: > tien con lai")
 	}
 

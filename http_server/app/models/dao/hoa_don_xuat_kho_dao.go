@@ -288,7 +288,7 @@ func ExportDebtPaymentExec(req *requests.Tra_no_xuat_kho_request) error {
 	}
 
 	//kiem tra tien tra no hop le
-	if hdxk.Con_lai <= req.Tien_tra {
+	if hdxk.Con_lai < req.Tien_tra {
 		return errors.New("tien tra no khong hop le: > tien con lai")
 	}
 
