@@ -2,14 +2,17 @@ definitions:
   requests.Chi_tiet_hoa_don_nhap_kho_create:
     properties:
       chiet_khau:
+        minimum: 0
         type: number
       ctsp_id:
         type: integer
       don_vi_tinh:
         type: string
       gia_ban:
+        minimum: 0
         type: number
       gia_nhap:
+        minimum: 0
         type: number
       han_su_dung:
         type: string
@@ -26,27 +29,24 @@ definitions:
       so_luong:
         type: integer
       thanh_tien:
+        minimum: 0
         type: number
       upc:
         type: string
     required:
-    - chiet_khau
     - ctsp_id
     - don_vi_tinh
-    - gia_ban
-    - gia_nhap
     - han_su_dung
     - hoa_don_id
     - ke
-    - la_qua_tang
     - san_pham_id
     - so_luong
-    - thanh_tien
     - upc
     type: object
   requests.Chi_tiet_hoa_don_xuat_kho_create:
     properties:
       chiet_khau:
+        minimum: 0
         type: number
       ctsp_id:
         type: integer
@@ -57,12 +57,15 @@ definitions:
           $ref: '#/definitions/requests.Chi_tiet_sku'
         type: array
       gia_ban:
+        minimum: 0
         type: number
       gia_nhap:
+        minimum: 0
         type: number
       la_qua_tang:
         type: boolean
       loi_nhuan:
+        minimum: 0
         type: number
       san_pham_id:
         type: integer
@@ -71,20 +74,15 @@ definitions:
       so_luong_ban:
         type: integer
       thanh_tien:
+        minimum: 0
         type: number
     required:
-    - chiet_khau
     - ctsp_id
     - don_vi_tinh
     - ds_sku
-    - gia_ban
-    - gia_nhap
-    - la_qua_tang
-    - loi_nhuan
     - san_pham_id
     - sku
     - so_luong_ban
-    - thanh_tien
     type: object
   requests.Chi_tiet_san_pham_nhap_tra:
     properties:
@@ -94,10 +92,6 @@ definitions:
         type: string
       so_luong_tra:
         type: integer
-    required:
-    - cthd_nhap_kho_id
-    - sku
-    - so_luong_tra
     type: object
   requests.Chi_tiet_san_pham_request:
     properties:
@@ -122,10 +116,6 @@ definitions:
         type: string
       so_luong_tra:
         type: integer
-    required:
-    - cthd_xuat_kho_id
-    - sku
-    - so_luong_tra
     type: object
   requests.Chi_tiet_sku:
     properties:
@@ -184,6 +174,7 @@ definitions:
   requests.Hoa_don_nhap_kho_create:
     properties:
       con_lai:
+        minimum: 0
         type: number
       ds_san_pham_nhap:
         items:
@@ -202,14 +193,11 @@ definitions:
       so_hoa_don:
         type: integer
       tong_tien:
+        minimum: 0
         type: number
       tra_truoc:
+        minimum: 0
         type: number
-    required:
-    - ds_san_pham_nhap
-    - kho_id
-    - ngay_nhap
-    - nha_phan_phoi_id
     type: object
   requests.Hoa_don_nhap_kho_lock:
     properties:
@@ -220,8 +208,6 @@ definitions:
         - lock
         - open
         type: string
-    required:
-    - hoa_don_id
     type: object
   requests.Hoa_don_nhap_kho_update:
     properties:
@@ -232,16 +218,13 @@ definitions:
       ngay_nhap:
         type: string
       tra_truoc:
+        minimum: 0
         type: number
-    required:
-    - ghi_chu
-    - hoa_don_id
-    - ngay_nhap
-    - tra_truoc
     type: object
   requests.Hoa_don_xuat_kho_create:
     properties:
       con_lai:
+        minimum: 0
         type: number
       da_giao_hang:
         type: boolean
@@ -252,14 +235,14 @@ definitions:
       ghi_chu:
         type: string
       gia_tri_chiet_khau:
+        minimum: 0
         type: integer
       khach_hang_id:
         type: integer
       loai_chiet_khau:
         type: integer
       loi_nhuan:
-        description: "Tong_gia_nhap\t\t\t\tfloat32\t\t\t\t\t\t`json:\"tong_gia_nhap\"
-          binding:\"omitempty\"`"
+        minimum: 0
         type: number
       ma_hoa_don:
         type: string
@@ -272,27 +255,20 @@ definitions:
       so_hoa_don:
         type: integer
       thanh_tien:
+        minimum: 0
+        type: number
+      tong_gia_nhap:
+        minimum: 0
         type: number
       tong_tien:
+        minimum: 0
         type: number
       tra_truoc:
+        minimum: 0
         type: number
       vat:
+        minimum: 0
         type: number
-    required:
-    - da_giao_hang
-    - ds_san_pham_xuat
-    - gia_tri_chiet_khau
-    - khach_hang_id
-    - loai_chiet_khau
-    - loi_nhuan
-    - ngay_xuat
-    - nhan_vien_giao_hang_id
-    - nhan_vien_sale_id
-    - thanh_tien
-    - tong_tien
-    - tra_truoc
-    - vat
     type: object
   requests.Hoa_don_xuat_kho_lock:
     properties:
@@ -303,8 +279,6 @@ definitions:
         - lock
         - open
         type: string
-    required:
-    - hoa_don_id
     type: object
   requests.Hoa_don_xuat_kho_update:
     properties:
@@ -313,6 +287,7 @@ definitions:
       ghi_chu:
         type: string
       gia_tri_chiet_khau:
+        minimum: 0
         type: integer
       hoa_don_id:
         type: integer
@@ -327,15 +302,11 @@ definitions:
       nhan_vien_sale_id:
         type: integer
       tra_truoc:
+        minimum: 0
         type: number
       vat:
+        minimum: 0
         type: number
-    required:
-    - hoa_don_id
-    - khach_hang_id
-    - ngay_xuat
-    - nhan_vien_giao_hang_id
-    - nhan_vien_sale_id
     type: object
   requests.Khach_hang_create:
     properties:
@@ -634,6 +605,19 @@ definitions:
     - id
     - ten
     type: object
+  requests.Tin_nhan_create:
+    properties:
+      content:
+        type: integer
+      receiver_id:
+        type: integer
+      sender_id:
+        type: integer
+    required:
+    - content
+    - receiver_id
+    - sender_id
+    type: object
   requests.Tra_hang_nhap_kho_request:
     properties:
       ds_san_pham_tra:
@@ -642,9 +626,6 @@ definitions:
         type: array
       hoa_don_id:
         type: integer
-    required:
-    - ds_san_pham_tra
-    - hoa_don_id
     type: object
   requests.Tra_hang_xuat_kho_request:
     properties:
@@ -654,9 +635,6 @@ definitions:
         type: array
       hoa_don_id:
         type: integer
-    required:
-    - ds_san_pham_tra
-    - hoa_don_id
     type: object
   requests.Tra_no_nhap_kho_request:
     properties:
@@ -664,9 +642,6 @@ definitions:
         type: integer
       tien_tra:
         type: number
-    required:
-    - hoa_don_id
-    - tien_tra
     type: object
   requests.Tra_no_xuat_kho_request:
     properties:
@@ -674,9 +649,6 @@ definitions:
         type: integer
       tien_tra:
         type: number
-    required:
-    - hoa_don_id
-    - tien_tra
     type: object
   responses.Dang_nhap:
     properties:
@@ -1879,14 +1851,14 @@ paths:
       summary: Delete Employee
       tags:
       - employee
-  /api/v1/quyen:
+  /api/v1/quyen/{chuc_vu_id}:
     get:
       consumes:
       - application/x-www-form-urlencoded
       description: Get permission by role id
       parameters:
       - description: Role id
-        in: query
+        in: path
         name: Chuc_vu_id
         required: true
         type: integer
@@ -2138,6 +2110,70 @@ paths:
       summary: Get Me
       tags:
       - auth
+  /api/v1/tin-nhan:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: Filter message based on provided filters
+      parameters:
+      - description: Filters in JSON format
+        in: query
+        name: filters
+        type: string
+      - description: Sort field
+        in: query
+        name: sort
+        type: string
+      - description: Sort order (asc/desc)
+        in: query
+        name: order
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Limit per page
+        in: query
+        name: limit
+        required: true
+        type: integer
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: Filter Message
+      tags:
+      - message
+    post:
+      consumes:
+      - application/json
+      description: Create a new message entry
+      parameters:
+      - description: Message Create Data
+        in: body
+        name: CreateMessage
+        required: true
+        schema:
+          $ref: '#/definitions/requests.Tin_nhan_create'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'data: Tin_nhan_create, message: them tin nhan thanh cong'
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: 'message: error message'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create Message
+      tags:
+      - message
   /api/v1/ton-kho/{ctsp_id}:
     get:
       consumes:

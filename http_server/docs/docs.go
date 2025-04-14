@@ -1817,33 +1817,6 @@ const docTemplate = `{
                 "responses": {}
             }
         },
-        "/api/v1/quyen": {
-            "get": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Get permission by role id",
-                "consumes": [
-                    "application/x-www-form-urlencoded"
-                ],
-                "tags": [
-                    "permission"
-                ],
-                "summary": "Get Permission",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Role id",
-                        "name": "Chuc_vu_id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {}
-            }
-        },
         "/api/v1/quyen/modify": {
             "patch": {
                 "security": [
@@ -1868,6 +1841,33 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/requests.Quyen_modify"
                         }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/quyen/{chuc_vu_id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get permission by role id",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "permission"
+                ],
+                "summary": "Get Permission",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Role id",
+                        "name": "Chuc_vu_id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {}
@@ -2221,6 +2221,105 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/v1/tin-nhan": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Filter message based on provided filters",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "message"
+                ],
+                "summary": "Filter Message",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filters in JSON format",
+                        "name": "filters",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort field",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort order (asc/desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit per page",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new message entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "message"
+                ],
+                "summary": "Create Message",
+                "parameters": [
+                    {
+                        "description": "Message Create Data",
+                        "name": "CreateMessage",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Tin_nhan_create"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data: Tin_nhan_create, message: them tin nhan thanh cong",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "message: error message",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/ton-kho/{ctsp_id}": {
             "get": {
                 "security": [
@@ -2253,23 +2352,19 @@ const docTemplate = `{
         "requests.Chi_tiet_hoa_don_nhap_kho_create": {
             "type": "object",
             "required": [
-                "chiet_khau",
                 "ctsp_id",
                 "don_vi_tinh",
-                "gia_ban",
-                "gia_nhap",
                 "han_su_dung",
                 "hoa_don_id",
                 "ke",
-                "la_qua_tang",
                 "san_pham_id",
                 "so_luong",
-                "thanh_tien",
                 "upc"
             ],
             "properties": {
                 "chiet_khau": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "ctsp_id": {
                     "type": "integer"
@@ -2278,10 +2373,12 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "gia_ban": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "gia_nhap": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "han_su_dung": {
                     "type": "string"
@@ -2305,7 +2402,8 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "thanh_tien": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "upc": {
                     "type": "string"
@@ -2315,22 +2413,17 @@ const docTemplate = `{
         "requests.Chi_tiet_hoa_don_xuat_kho_create": {
             "type": "object",
             "required": [
-                "chiet_khau",
                 "ctsp_id",
                 "don_vi_tinh",
                 "ds_sku",
-                "gia_ban",
-                "gia_nhap",
-                "la_qua_tang",
-                "loi_nhuan",
                 "san_pham_id",
                 "sku",
-                "so_luong_ban",
-                "thanh_tien"
+                "so_luong_ban"
             ],
             "properties": {
                 "chiet_khau": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "ctsp_id": {
                     "type": "integer"
@@ -2345,16 +2438,19 @@ const docTemplate = `{
                     }
                 },
                 "gia_ban": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "gia_nhap": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "la_qua_tang": {
                     "type": "boolean"
                 },
                 "loi_nhuan": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "san_pham_id": {
                     "type": "integer"
@@ -2366,17 +2462,13 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "thanh_tien": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 }
             }
         },
         "requests.Chi_tiet_san_pham_nhap_tra": {
             "type": "object",
-            "required": [
-                "cthd_nhap_kho_id",
-                "sku",
-                "so_luong_tra"
-            ],
             "properties": {
                 "cthd_nhap_kho_id": {
                     "type": "integer"
@@ -2413,11 +2505,6 @@ const docTemplate = `{
         },
         "requests.Chi_tiet_san_pham_xuat_tra": {
             "type": "object",
-            "required": [
-                "cthd_xuat_kho_id",
-                "sku",
-                "so_luong_tra"
-            ],
             "properties": {
                 "cthd_xuat_kho_id": {
                     "type": "integer"
@@ -2514,15 +2601,10 @@ const docTemplate = `{
         },
         "requests.Hoa_don_nhap_kho_create": {
             "type": "object",
-            "required": [
-                "ds_san_pham_nhap",
-                "kho_id",
-                "ngay_nhap",
-                "nha_phan_phoi_id"
-            ],
             "properties": {
                 "con_lai": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "ds_san_pham_nhap": {
                     "type": "array",
@@ -2549,18 +2631,17 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "tong_tien": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "tra_truoc": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 }
             }
         },
         "requests.Hoa_don_nhap_kho_lock": {
             "type": "object",
-            "required": [
-                "hoa_don_id"
-            ],
             "properties": {
                 "hoa_don_id": {
                     "type": "integer"
@@ -2576,12 +2657,6 @@ const docTemplate = `{
         },
         "requests.Hoa_don_nhap_kho_update": {
             "type": "object",
-            "required": [
-                "ghi_chu",
-                "hoa_don_id",
-                "ngay_nhap",
-                "tra_truoc"
-            ],
             "properties": {
                 "ghi_chu": {
                     "type": "string"
@@ -2593,30 +2668,17 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "tra_truoc": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 }
             }
         },
         "requests.Hoa_don_xuat_kho_create": {
             "type": "object",
-            "required": [
-                "da_giao_hang",
-                "ds_san_pham_xuat",
-                "gia_tri_chiet_khau",
-                "khach_hang_id",
-                "loai_chiet_khau",
-                "loi_nhuan",
-                "ngay_xuat",
-                "nhan_vien_giao_hang_id",
-                "nhan_vien_sale_id",
-                "thanh_tien",
-                "tong_tien",
-                "tra_truoc",
-                "vat"
-            ],
             "properties": {
                 "con_lai": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "da_giao_hang": {
                     "type": "boolean"
@@ -2631,7 +2693,8 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "gia_tri_chiet_khau": {
-                    "type": "integer"
+                    "type": "integer",
+                    "minimum": 0
                 },
                 "khach_hang_id": {
                     "type": "integer"
@@ -2640,8 +2703,8 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "loi_nhuan": {
-                    "description": "Tong_gia_nhap\t\t\t\tfloat32\t\t\t\t\t\t` + "`" + `json:\"tong_gia_nhap\" binding:\"omitempty\"` + "`" + `",
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "ma_hoa_don": {
                     "type": "string"
@@ -2659,24 +2722,29 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "thanh_tien": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
+                },
+                "tong_gia_nhap": {
+                    "type": "number",
+                    "minimum": 0
                 },
                 "tong_tien": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "tra_truoc": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "vat": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 }
             }
         },
         "requests.Hoa_don_xuat_kho_lock": {
             "type": "object",
-            "required": [
-                "hoa_don_id"
-            ],
             "properties": {
                 "hoa_don_id": {
                     "type": "integer"
@@ -2692,13 +2760,6 @@ const docTemplate = `{
         },
         "requests.Hoa_don_xuat_kho_update": {
             "type": "object",
-            "required": [
-                "hoa_don_id",
-                "khach_hang_id",
-                "ngay_xuat",
-                "nhan_vien_giao_hang_id",
-                "nhan_vien_sale_id"
-            ],
             "properties": {
                 "da_giao_hang": {
                     "type": "boolean"
@@ -2707,7 +2768,8 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "gia_tri_chiet_khau": {
-                    "type": "integer"
+                    "type": "integer",
+                    "minimum": 0
                 },
                 "hoa_don_id": {
                     "type": "integer"
@@ -2728,10 +2790,12 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "tra_truoc": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 },
                 "vat": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 0
                 }
             }
         },
@@ -3169,12 +3233,27 @@ const docTemplate = `{
                 }
             }
         },
-        "requests.Tra_hang_nhap_kho_request": {
+        "requests.Tin_nhan_create": {
             "type": "object",
             "required": [
-                "ds_san_pham_tra",
-                "hoa_don_id"
+                "content",
+                "receiver_id",
+                "sender_id"
             ],
+            "properties": {
+                "content": {
+                    "type": "integer"
+                },
+                "receiver_id": {
+                    "type": "integer"
+                },
+                "sender_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.Tra_hang_nhap_kho_request": {
+            "type": "object",
             "properties": {
                 "ds_san_pham_tra": {
                     "type": "array",
@@ -3189,10 +3268,6 @@ const docTemplate = `{
         },
         "requests.Tra_hang_xuat_kho_request": {
             "type": "object",
-            "required": [
-                "ds_san_pham_tra",
-                "hoa_don_id"
-            ],
             "properties": {
                 "ds_san_pham_tra": {
                     "type": "array",
@@ -3207,10 +3282,6 @@ const docTemplate = `{
         },
         "requests.Tra_no_nhap_kho_request": {
             "type": "object",
-            "required": [
-                "hoa_don_id",
-                "tien_tra"
-            ],
             "properties": {
                 "hoa_don_id": {
                     "type": "integer"
@@ -3222,10 +3293,6 @@ const docTemplate = `{
         },
         "requests.Tra_no_xuat_kho_request": {
             "type": "object",
-            "required": [
-                "hoa_don_id",
-                "tien_tra"
-            ],
             "properties": {
                 "hoa_don_id": {
                     "type": "integer"
