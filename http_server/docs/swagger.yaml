@@ -608,7 +608,7 @@ definitions:
   requests.Tin_nhan_create:
     properties:
       content:
-        type: integer
+        type: string
       receiver_id:
         type: integer
       sender_id:

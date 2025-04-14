@@ -3242,7 +3242,7 @@ const docTemplate = `{
             ],
             "properties": {
                 "content": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "receiver_id": {
                     "type": "integer"
