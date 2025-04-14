@@ -29,6 +29,30 @@ type senderMessage struct {
 	Message		string
 } 
 
+var producer sarama.SyncProducer
+
+func initProducer(p *sarama.SyncProducer) {
+	// Cấu hình producer
+	config := sarama.NewConfig()
+	config.Producer.Return.Successes = true // Chờ xác nhận gửi thành công
+	// config.Producer.Idempotent = true
+	// config.Producer.RequiredAcks = sarama.WaitForAll
+	// config.Producer.Transaction.ID = "my-transaction"
+	// config.Net.MaxOpenRequests = 1 
+
+	// Kết nối đến Kafka
+	brokers := []string{"localhost:9092"}
+
+	producer, err := sarama.NewSyncProducer(brokers, config)
+	if err != nil {
+		log.Fatalf("Không thể tạo producer: %v", err)
+	}
+
+	p = &producer
+
+	defer producer.Close()
+}
+
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool { 
 		fmt.Println("Yêu cầu từ Origin:", r.Header.Get("Origin")) // Debug origin
@@ -157,23 +181,6 @@ func ReadMessageHandler(conn *websocket.Conn, senderId int) {
 }
 
 func SendMessageByProducerHandler(clientMessage string) {
-	// Cấu hình producer
-	config := sarama.NewConfig()
-	config.Producer.Return.Successes = true // Chờ xác nhận gửi thành công
-	// config.Producer.Idempotent = true
-	// config.Producer.RequiredAcks = sarama.WaitForAll
-	// config.Producer.Transaction.ID = "my-transaction"
-	// config.Net.MaxOpenRequests = 1 
-
-	// Kết nối đến Kafka
-	brokers := []string{"localhost:9092"}
-
-	producer, err := sarama.NewSyncProducer(brokers, config)
-	if err != nil {
-		log.Fatalf("Không thể tạo producer: %v", err)
-	}
-	defer producer.Close()
-
 	// Tạo một message gửi vào topic "test-topic"
 	msg := &sarama.ProducerMessage{
 		Topic: "chat-topic",
@@ -210,6 +217,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	initProducer(&producer)
 
 	_ = http.Serve(ln, r)
 }

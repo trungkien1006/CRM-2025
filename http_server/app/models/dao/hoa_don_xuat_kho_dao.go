@@ -383,5 +383,10 @@ func ReturnExportProductExec(req *requests.Tra_hang_xuat_kho_request) error {
 		}
 	}
 
+	//commit transaction
+	if err := tx.Commit().Error; err != nil {
+		return errors.New("loi commit transaction: " + err.Error())
+	}
+
 	return nil
 }
