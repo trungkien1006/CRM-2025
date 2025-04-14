@@ -17,7 +17,7 @@ var redisContext = context.Background()
 
 // @title CRM
 // @version 1.0
-// @host 192.168.0.120:8000
+// @host 130.33.221.251:8000
 // @securityDefinitions.apikey BearerAuth
 // @in header
 // @name Authorization

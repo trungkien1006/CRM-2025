@@ -690,7 +690,7 @@ definitions:
       ten_dang_nhap:
         type: string
     type: object
-host: 192.168.0.120:8000
+host: 130.33.221.251:8000
 info:
   contact: {}
   title: CRM
