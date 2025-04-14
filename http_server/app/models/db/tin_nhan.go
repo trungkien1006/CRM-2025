@@ -7,7 +7,7 @@ type Tin_nhan struct {
 
 	Sender_id		int			`json:"sender_id"`
 	Receiver_id		int			`json:"receiver_id"`
-	Content			int			`json:"content"`
+	Content			string		`json:"content"`
 	Is_read			bool		`json:"is_read"`
 
 	Sender			Nhan_vien	`json:"sender" gorm:"foreignKey:Sender_id"`
