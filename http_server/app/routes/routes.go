@@ -120,6 +120,11 @@ func InitRoute() *gin.Engine {
 			auth.PATCH("/hoa-don-xuat-kho/tra-no", controllers.ExportDebtPayment)
 			auth.PATCH("/hoa-don-xuat-kho/tra-hang", controllers.ReturnExportProduct)
 
+			//tin nhan
+			auth.GET("/tin-nhan", controllers.FilterMessage)
+			auth.POST("/tin-nhan", controllers.CreateMessage)
+			// auth.POST("/tin-nhan/batch", controllers.CreateBatchMessage)
+
 			//chi tiet san pham
 			auth.GET("/chi-tiet-san-pham/:product_id", controllers.GetProductDetail)
 
