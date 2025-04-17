@@ -29,13 +29,12 @@ func main() {
 		_ = godotenv.Load() // Chỉ tải .env nếu không chạy trong Docker
 	}
 
-
 	helpers.Redis = redis.NewClient(&redis.Options{
-		// Addr:         "172.26.168.7:6379",
+		Addr: "172.17.127.218:6379",
 		// Addr:         "redis:6379",
-		Addr:         "0.0.0.0:6379",
+		// Addr:         "0.0.0.0:6379",
 		PoolSize:     20,
-		MinIdleConns: 5,  
+		MinIdleConns: 5,
 	})
 
 	pong, err := helpers.Redis.Ping(helpers.Ctx).Result()
@@ -46,7 +45,7 @@ func main() {
 	}
 
 	fmt.Println("Kết nối Redis thành công:", pong)
-	
+
 	if err != nil {
 		panic(err)
 	}
@@ -57,7 +56,7 @@ func main() {
 
 	fmt.Println("Port của bạn: ", port)
 
-	ln, err := net.Listen("tcp", "0.0.0.0:" + port)
+	ln, err := net.Listen("tcp", "0.0.0.0:"+port)
 
 	if err != nil {
 		panic(err)
